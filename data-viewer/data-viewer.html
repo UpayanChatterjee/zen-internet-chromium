@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenInternet - Advanced Settings</title>
+    <link rel="stylesheet" href="../theme.css">
+    <link rel="stylesheet" href="../popup/popup.css">
+    <link rel="stylesheet" href="data-viewer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div id="header-container">
+                <div class="logo-container">
+                    <img src="../assets/images/logo.png" alt="ZenInternet Logo" class="logo-img">
+                    <h1 class="app-title">Zen Internet Settings</h1>
+                </div>
+                <div class="miniheader">
+                    <div id="addon-version" class="addon-version"></div>
+                    <div class="author">by <a href="https://www.sameerasw.com/" target="_blank">@sameerasw</a></div>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-content">
+            <!-- Backup & Restore section moved to top -->
+            <div class="data-section">
+                <h2 class="section-title">Backup & Restore ✨</h2>
+                <div class="backup-restore-container">
+                    <p class="backup-description">
+                        Export your settings to a JSON file or import settings from a previously exported file.
+                        <br><strong>Note:</strong> This includes global settings, website lists, and website-specific
+                        feature toggles, but not the actual style data which will be re-fetched.
+                    </p>
+                    <div class="backup-actions">
+                        <button id="export-settings" class="action-button primary">
+                            <i class="fas fa-upload"></i> Export Settings
+                        </button>
+                        <div class="import-container">
+                            <label for="import-file" class="action-button secondary import-label">
+                                <i class="fas fa-download"></i> Import Settings
+                            </label>
+                            <input type="file" id="import-file" accept=".json" hidden>
+                        </div>
+                    </div>
+                    <div id="import-status" class="import-status"></div>
+                </div>
+            </div>
+
+            <!-- Global toggles grouped into a single section with a heading -->
+            <div class="data-section">
+                <h2 class="section-title">Global Feature Controls ✨</h2>
+                <div class="global-toggles-container">
+                    <div class="toggle-row">
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="disable-transparency">
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="toggle-label">Disable Transparency</span>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="disable-hover">
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="toggle-label">Disable Hover Effects</span>
+                        </div>
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="disable-footer">
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="toggle-label">Keep Footers</span>
+                        </div>
+                    </div>
+                    <div class="setting-description">
+                        These settings control specific feature types across all websites.
+                        Changes apply only to newly opened or reloaded tabs.
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-section">
+                <h2 class="section-title">Global Settings</h2>
+                <div id="global-settings-data" class="data-container"></div>
+            </div>
+
+            <div class="data-section">
+                <h2 class="section-title">Skip/Enable List</h2>
+                <div id="skip-list-data" class="data-container"></div>
+            </div>
+
+            <!-- Repository URL section moved above danger zone -->
+            <div class="data-section">
+                <h2 class="section-title">Custom Styles Repository ✨</h2>
+                <div class="repository-url-container">
+                    <p class="setting-description">
+                        Change the URL where styles are fetched from. Use this if you want to use a different styles
+                        repository.
+                        <br><strong>Note:</strong> After changing the URL, you should clear existing styles data for
+                        best results.
+                    </p>
+                    <div class="repository-url-controls">
+                        <input type="text" id="repository-url" class="repository-url-input"
+                            placeholder="Enter repository URL...">
+                        <div class="repository-url-buttons">
+                            <button id="set-repository-url" class="action-button primary">
+                                <i class="fas fa-save"></i> Set URL
+                            </button>
+                            <button id="reset-repository-url" class="action-button secondary">
+                                <i class="fas fa-undo"></i> Reset to Default
+                            </button>
+                        </div>
+                    </div>
+                    <div id="repository-url-status" class="repository-url-status"></div>
+                </div>
+            </div>
+
+            <div class="danger-zone">
+                <h3 class="danger-title">Danger Zone</h3>
+                <div class="danger-actions">
+                    <button id="delete-all-data" class="action-button danger">
+                        <i class="fas fa-trash"></i> Delete All Data
+                    </button>
+                </div>
+            </div>
+
+            <div class="data-section">
+                <h2 class="section-title collapsible" data-target="websites-section">
+                    <i class="fas fa-chevron-down"></i>
+                    Websites and CSS
+                </h2>
+                <div id="combined-websites-data" class="data-container collapsed" data-section="websites-section"></div>
+            </div>
+
+            <div class="data-section">
+                <h2 class="section-title collapsible" data-target="mappings-section">
+                    <i class="fas fa-chevron-down"></i>
+                    Style Mappings ✨
+                </h2>
+                <div id="mappings-data" class="data-container collapsed" data-section="mappings-section"></div>
+                <div id="user-mapping-controls" class="mapping-controls">
+                    <div class="mapping-instructions">
+                        <strong>Custom Mapping:</strong> Add your own site-to-style mappings below.<br>
+                        <em>Do <b>not</b> include <b>https://</b> or <b>www</b> in the site field. Use only the domain
+                            (e.g. <b>example.com</b>).</em>
+                    </div>
+                    <form id="add-mapping-form" class="add-mapping-form">
+                        <input type="text" id="source-style-input" placeholder="Source Style (e.g. github.com.css)"
+                            required>
+                        <input type="text" id="target-site-input" placeholder="Target Site (e.g. gist.github.com)"
+                            required>
+                        <button type="submit" class="action-button primary">Add Mapping</button>
+                    </form>
+                    <div id="user-mappings-list" class="user-mappings-list"></div>
+                </div>
+            </div>
+
+
+            <footer class="app-footer">
+                <a href="https://sameerasw.github.io/my-internet/" class="footer-link" target="_blank">
+                    <i class="fas fa-book"></i> Styles Repository
+                </a>
+                <div class="footer-divider"></div>
+                <a href="https://github.com/sameerasw/zeninternet" class="footer-link" target="_blank">
+                    <i class="fa-brands fa-github"></i> Project Repository
+                </a>
+            </footer>
+        </main>
+    </div>
+    <script src="data-viewer.js"></script>
+</body>
+
+</html>

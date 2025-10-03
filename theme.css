@@ -1,0 +1,50 @@
+/* Base theme variables for Zen Internet */
+
+/* Dark theme (default) */
+:root {
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --transition: all 0.2s ease;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  --accent-color: #f98764;
+  --hover-color: #fa9475;
+  --success-color: #40c057;
+  --warning-color: #fab005;
+  --danger-color: #fa5252;
+  --danger-hover-color: #e03444;
+  --bg-color: #1e1e2e;
+  --secondary-bg: #2a2a3c;
+  --border-color: #4c4c63;
+  --text-primary: #e2e8f0;
+  --text-secondary: #a0a0b8;
+  --header-bg-start: #2c3e50;
+  --header-bg-end: #1a2530;
+  --bg-transparent: #2245;
+  --bg-transparent-surface: #3355;
+  --logo-filter: none;
+  --danger-bg-color: rgba(220, 53, 69, 0.1);
+  --danger-border-color: rgba(220, 53, 69, 0.3);
+}
+
+/* Light theme */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-color: #f5f7fa;
+    --secondary-bg: #e9ecef;
+    --border-color: #ced4da;
+    --text-primary: #343a40;
+    --text-secondary: #6c757d;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --header-bg-start: #f98764;
+    --header-bg-end: #e77c5d;
+    --bg-transparent: #bbb5;
+    --bg-transparent-surface: #aaa5;
+    /* Invert and desaturate logo in light mode */
+    --logo-filter: invert(1) saturate(0);
+    --danger-bg-color: rgba(220, 53, 69, 0.08);
+    --danger-border-color: rgba(220, 53, 69, 0.2);
+    --danger-color: #dc3545;
+    --danger-hover-color: #c82333;
+  }
+}
